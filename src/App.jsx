@@ -1,30 +1,28 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
 import {AuthHome} from './screens';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const App = () => {
-  const isLogin = false;
-
-  const stack = createStackNavigator();
+  const Stack = createStackNavigator();
 
   const AuthStack = () => {
     return (
-      <stack.Navigator>
-        <stack.Screen name="AuthHome" component={AuthHome} />
-      </stack.Navigator>
+      <Stack.Navigator initialRouteName="AuthHome">
+        <Stack.Screen
+          name="AuthHome"
+          component={AuthHome}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
     );
-  };
-
-  const AppStack = () => {
-    return null;
   };
 
   const AppNav = () => {
     return (
       <NavigationContainer>
-        isLogin?
-        <AuthStack />:<AuthStack />
+        <AuthStack />
       </NavigationContainer>
     );
   };

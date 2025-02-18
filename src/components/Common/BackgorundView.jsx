@@ -1,28 +1,26 @@
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils/colors';
 
-const BackgorundView = ({children}) => {
+const BackgroundView = ({children}) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.ScrollView}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
         {children}
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.primaryBackground,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.primaryBackground,
   },
-  ScrollView: {
-    flexGrow: 1,
-  },
 });
 
-export default BackgorundView;
+export default BackgroundView;

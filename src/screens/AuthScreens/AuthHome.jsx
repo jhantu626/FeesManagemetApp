@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {BackgorundView} from '../../components';
 
 const AuthHome = () => {
   return (
-    <View>
+    <BackgorundView>
       <Text>AuthHome</Text>
-    </View>
-  )
-}
+    </BackgorundView>
+  );
+};
 
-export default AuthHome
+const styles = StyleSheet.create({});
 
-const styles = StyleSheet.create({})
+export default AuthHome;
