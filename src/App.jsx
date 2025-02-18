@@ -1,14 +1,35 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {AuthHome} from './screens';
 
 const App = () => {
-  return (
-    <View>
-      <Text>App</Text>
-    </View>
-  );
-};
+  const isLogin = false;
 
-const styles = StyleSheet.create({});
+  const stack = createStackNavigator();
+
+  const AuthStack = () => {
+    return (
+      <stack.Navigator>
+        <stack.Screen name="AuthHome" component={AuthHome} />
+      </stack.Navigator>
+    );
+  };
+
+  const AppStack = () => {
+    return null;
+  };
+
+  const AppNav = () => {
+    return (
+      <NavigationContainer>
+        isLogin?
+        <AuthStack />:<AuthStack />
+      </NavigationContainer>
+    );
+  };
+
+  return <AppNav />;
+};
 
 export default App;
