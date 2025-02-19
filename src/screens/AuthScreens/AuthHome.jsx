@@ -38,7 +38,7 @@ const AuthHome = () => {
           <TouchableOpacity
             style={[styles.btn, {backgroundColor: colors.primary}]}
             onPress={() => {
-              navigation.navigate('Splash');
+              navigation.navigate('Login');
             }}>
             <Text style={[styles.btnText, {color: colors.secondary}]}>
               Login
@@ -46,6 +46,7 @@ const AuthHome = () => {
           </TouchableOpacity>
           <Text style={styles.middleText}>-- or --</Text>
           <TouchableOpacity
+          onPress={()=>navigation.navigate("Register")}
             style={[styles.btn, {borderWidth: 1, borderColor: '#000'}]}>
             <Text style={styles.btnText}>Register</Text>
           </TouchableOpacity>
