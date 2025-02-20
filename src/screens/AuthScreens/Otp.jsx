@@ -10,10 +10,17 @@ import React, {useEffect, useRef, useState} from 'react';
 import {BackgorundView} from '../../components';
 import fonts from '../../utils/fonts';
 import {colors} from '../../utils/colors';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {authService} from '../../services/AuthService';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from '../../utils/ToastsConfig';
 
 const Otp = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const {mobile} = route.params;
+  console.log(mobile);
 
   const [otpValues, setOtpValues] = useState(['', '', '', '', '']);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -42,12 +49,31 @@ const Otp = () => {
     }
   };
 
+  const checkOtp = async () => {
+    try {
+      const fullfilledOtp = otpValues.join('');
+      const data = await authService.validateOtp({
+        mobile: mobile,
+        otp: fullfilledOtp,
+      });
+      if (!data?.status) {
+        Toast.show({
+          text1: 'Invalid otp',
+          type: 'info',
+          visibilityTime: 2000,
+        });
+      }
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const isFullfiled = otpValues.every(otp => otp.length > 0);
     if (isFullfiled) {
-      console.log('otp checking');
+      checkOtp();
     }
-    console.log(otpValues.join(''));
   }, [otpValues]);
 
   return (

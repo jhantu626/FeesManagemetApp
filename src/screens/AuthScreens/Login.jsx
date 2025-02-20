@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   Text,
@@ -14,6 +15,8 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {isValidMobile} from '../../utils/validations';
 import {authService} from '../../services/AuthService';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from '../../utils/ToastsConfig';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -22,6 +25,7 @@ const Login = () => {
   const [mobile, setMobile] = useState('');
   const [error, setError] = useState({status: false, msg: ''});
   const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleMobilenChange = text => {
     const numRegex = /^\d*$/;
@@ -45,6 +49,12 @@ const Login = () => {
     try {
       const data = await authService.checkByMobile({mobile: mobile});
       console.info(data);
+      if (!data) {
+        setError({status: true, msg: 'Teacher does not exist!'});
+        setIsValid(false);
+      } else {
+        setIsValid(true);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -52,15 +62,38 @@ const Login = () => {
 
   useEffect(() => {
     if (mobile.length === 10) {
-      console.log('Checking');
       checkApiCall();
-    } else {
-      setError({status: false});
     }
   }, [mobile]);
 
+  const handleLogin = async () => {
+    try {
+      setIsLoading(true);
+      const data = await authService.login({mobile});
+      console.log(data);
+      if (data.status) {
+        navigation.navigate('Otp', {
+          mobile: mobile,
+        });
+      } else {
+        Toast.show({
+          type: 'info',
+          text1: 'Something went wrong',
+          autoHide: true,
+          visibilityTime: 2000,
+        });
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <BackgorundView>
+      
       <View style={styles.container}>
         <Image
           style={{
@@ -94,6 +127,7 @@ const Login = () => {
                 style={styles.phoneIcon}
                 name="add-call"
                 size={24}
+                color={colors.textOnGray}
               />
             </View>
             <Text
@@ -115,10 +149,14 @@ const Login = () => {
           </View>
           {error.status && <Text style={styles.alertText}>{error.msg}</Text>}
           <TouchableOpacity
-            disabled={!isValid}
-            onPress={() => navigation.navigate('Otp')}
+            disabled={!isValid || isLoading}
+            onPress={handleLogin}
             style={styles.loginBtn}>
-            <Text style={styles.loginTxt}>Login</Text>
+            {isLoading ? (
+              <ActivityIndicator color={colors.secondary} size={'large'} />
+            ) : (
+              <Text style={styles.loginTxt}>Login</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>
