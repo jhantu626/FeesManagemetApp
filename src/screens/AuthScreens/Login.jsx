@@ -13,6 +13,7 @@ import {colors} from '../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {isValidMobile} from '../../utils/validations';
+import {authService} from '../../services/AuthService';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -40,9 +41,21 @@ const Login = () => {
     }
   };
 
+  const checkApiCall = async () => {
+    try {
+      const data = await authService.checkByMobile({mobile: mobile});
+      console.info(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (mobile.length === 10) {
       console.log('Checking');
+      checkApiCall();
+    } else {
+      setError({status: false});
     }
   }, [mobile]);
 
