@@ -14,10 +14,12 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {authService} from '../../services/AuthService';
 import Toast from 'react-native-toast-message';
 import {toastConfig} from '../../utils/ToastsConfig';
+import {useAuth} from '../../contexts/AuthContext';
 
 const Otp = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const {login} = useAuth();
 
   const {mobile} = route.params;
   console.log(mobile);
@@ -56,7 +58,9 @@ const Otp = () => {
         mobile: mobile,
         otp: fullfilledOtp,
       });
-      if (!data?.status) {
+      if (data?.status) {
+        login({authToken: data?.token});
+      } else {
         Toast.show({
           text1: 'Invalid otp',
           type: 'info',

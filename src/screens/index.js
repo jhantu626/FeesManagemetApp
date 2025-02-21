@@ -11,6 +11,12 @@ import Register from './AuthScreens/Register';
 // 1. -- Home --
 import Home from './Main/Home';
 
+import Student from './Main/Student';
+
+import Fees from './Main/Fees';
+
+import Batch from './Main/Batch';
+
 export {
   SplashScreen,
   //AuthScreens
@@ -21,4 +27,7 @@ export {
 
   // Main Screens
   Home,
+  Student,
+  Fees,
+  Batch
 };

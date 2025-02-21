@@ -93,7 +93,6 @@ const Login = () => {
 
   return (
     <BackgorundView>
-      
       <View style={styles.container}>
         <Image
           style={{
