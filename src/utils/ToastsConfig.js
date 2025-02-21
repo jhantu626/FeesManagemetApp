@@ -11,14 +11,14 @@ const toastConfig = {
   success: ({text1}) => (
     <View
       style={{
-        width: 'auto', // 80% of screen width
-        height: 40, // Fixed height
-        backgroundColor: '#4CAF50', // Green background
-        borderRadius: 20, // Border radius
-        flexDirection: 'row', // Align icon and text horizontally
-        alignItems: 'center', // Center vertically
+        width: 'auto', 
+        height: 40, 
+        backgroundColor: '#4CAF50',
+        borderRadius: 20, 
+        flexDirection: 'row',
+        alignItems: 'center',
         paddingHorizontal: 15,
-        justifyContent: 'center', // Padding for text
+        justifyContent: 'center',
       }}>
       <Icon name="check-circle" size={28} color="white" /> {/* Success icon */}
       <Text style={{color: 'white', marginLeft: 10, fontFamily: fonts.medium}}>
@@ -33,12 +33,12 @@ const toastConfig = {
   error: ({text1}) => (
     <View
       style={{
-        width: 'auto', // 80% of screen width
-        height: 40, // Fixed height
-        backgroundColor: '#FF5252', // Red background
-        borderRadius: 20, // Border radius
-        flexDirection: 'row', // Align icon and text horizontally
-        alignItems: 'center', // Center vertically
+        width: 'auto', 
+        height: 40,
+        backgroundColor: '#FF5252',
+        borderRadius: 20,
+        flexDirection: 'row', 
+        alignItems: 'center',
         paddingHorizontal: 15,
         justifyContent: 'center',
       }}>
@@ -55,15 +55,14 @@ const toastConfig = {
   info: ({text1}) => (
     <View
       style={{
-        width: 'auto', // 80% of screen width
-        height: 40, // Fixed height
-        backgroundColor: '#2196F3', // Blue background
-        borderRadius: 20, // Border radius
-        flexDirection: 'row', // Align icon and text horizontally
+        width: 'auto',
+        height: 40,
+        backgroundColor: '#2196F3',
+        borderRadius: 20,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center', // Center vertically
+        justifyContent: 'center',
         paddingHorizontal: 15,
-        // Padding for text
       }}>
       <Icon name="info-circle" size={28} color="white" /> {/* Info icon */}
       <Text style={{color: 'white', marginLeft: 10, fontFamily: fonts.medium}}>

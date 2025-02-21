@@ -7,6 +7,10 @@ import Login from './AuthScreens/Login';
 import Otp from './AuthScreens/Otp';
 import Register from './AuthScreens/Register';
 
+// Main Screens
+// 1. -- Home --
+import Home from './Main/Home';
+
 export {
   SplashScreen,
   //AuthScreens
@@ -14,4 +18,7 @@ export {
   Login,
   Otp,
   Register,
+
+  // Main Screens
+  Home,
 };

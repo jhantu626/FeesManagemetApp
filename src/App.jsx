@@ -1,9 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthHome, Login, Otp, Register, SplashScreen} from './screens';
+import {AuthHome, Home, Login, Otp, Register, SplashScreen} from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const App = () => {
   const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   const AuthStack = () => {
     return (
@@ -70,6 +72,14 @@ const App = () => {
           }}
         />
       </Stack.Navigator>
+    );
+  };
+
+  const AppStack = () => {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+      </Tab.Navigator>
     );
   };
 
