@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { BackgorundView } from '../../components'
+import { BackgorundView, MainHeader } from '../../components'
 
 const Home = () => {
   return (
     <BackgorundView>
+      <MainHeader/>
       <Text>Home</Text>
     </BackgorundView>
   )

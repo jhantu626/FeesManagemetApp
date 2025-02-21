@@ -120,17 +120,19 @@ const App = () => {
                 {...props}
                 android_ripple={{color: colors.secondary}}
               />
-              {props.accessibilityState.selected && <Image
-               style={{
-                position: 'absolute',
-                bottom: 0, 
-                width: '100%', 
-                height: 10,
-                resizeMode: 'contain',
-                alignSelf: 'center',
-              }}
-                source={require('./../assets/images/dashboard/menu-active.webp')}
-              />}
+              {props.accessibilityState.selected && (
+                <Image
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    width: '100%',
+                    height: 10,
+                    resizeMode: 'contain',
+                    alignSelf: 'center',
+                  }}
+                  source={require('./../assets/images/dashboard/menu-active.webp')}
+                />
+              )}
             </>
           ),
         }}>
