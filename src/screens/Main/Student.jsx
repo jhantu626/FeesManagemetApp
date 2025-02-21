@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {BackgorundView, SecondaryHeader} from '../../components';
 
 const Student = () => {
   return (
-    <View>
-      <Text>Student</Text>
-    </View>
-  )
-}
+    <BackgorundView>
+      <SecondaryHeader title="Student" />
+    </BackgorundView>
+  );
+};
 
-export default Student
+export default Student;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -1,11 +1,16 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {BackgorundView, SecondaryHeader} from '../../components';
 
 const Batch = () => {
   return (
-    <View>
-      <Text>Batch</Text>
-    </View>
+    <BackgorundView>
+      <SecondaryHeader
+        title={'Batch List'}
+        isBtn={true}
+        btnText={'Create Batch'}
+      />
+    </BackgorundView>
   );
 };
 

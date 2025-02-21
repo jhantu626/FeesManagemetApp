@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { BackgorundView, SecondaryHeader } from '../../components'
 
 const Fees = () => {
   return (
-    <View>
-      <Text>Fees</Text>
-    </View>
+    <BackgorundView>
+      <SecondaryHeader title={"Fees"}/>
+    </BackgorundView>
   )
 }
 
