@@ -68,10 +68,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   leftContainer: {
-    width: '50%',
+    width: '90%',
     height: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
   },
   imageContainer: {
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   greetingContainer: {
     height: '100%',
     justifyContent: 'center',
+    marginLeft: 10
     // alignItems: 'center',
   },
   greetingText: {
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     marginTop: -7,
   },
   notififationContainer: {
-    width: 50,
+    width: '10%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',

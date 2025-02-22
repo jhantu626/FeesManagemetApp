@@ -9,7 +9,7 @@ const SplashScreen = () => {
     setTimeout(()=>{
       console.log('SplashScreen');
       navigation.dispatch(StackActions.replace('AuthHome'));
-    },3000)
+    },1500)
   },[])
 
   return (
