@@ -1,24 +1,50 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {colors} from '../../utils/colors';
 import {getGreeting} from '../../utils/common';
 import fonts from '../../utils/fonts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {teacherService} from '../../services/TeacherService';
 
-const MainHeader = () => {
+const MainHeader = ({authToken}) => {
+  const [profileData, setProfileData] = useState({});
+  const fetchProfile = async () => {
+    try {
+      const data = await teacherService.fetchTeacherProfile({
+        authToken: authToken,
+      });
+      setProfileData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <TouchableOpacity style={styles.imageContainer}>
           <Image
             style={styles.profileImage}
-            source={require('./../../../assets/images/profile/avatar.jpg')}
+            source={
+              profileData?.profilePic
+                ? {
+                    uri: `${process.env.API_URL}/api/v1/file/profile/${profileData?.profilePic}`,
+                  }
+                : require('./../../../assets/images/profile/avatar.jpg')
+            }
             resizeMode="cover"
           />
         </TouchableOpacity>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>{getGreeting()}</Text>
-          <Text style={styles.nameText}>Jhantu Bala</Text>
+          <Text style={styles.nameText}>
+            {profileData?.name ? profileData?.name : 'User'}
+          </Text>
         </View>
       </View>
       <View style={styles.notififationContainer}>
@@ -63,7 +89,7 @@ const styles = StyleSheet.create({
   greetingContainer: {
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   greetingText: {
     fontSize: 12,

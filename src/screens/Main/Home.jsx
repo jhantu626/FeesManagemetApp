@@ -8,11 +8,14 @@ import {
   StudentList,
 } from '../../components';
 import {LineChart} from 'react-native-chart-kit';
+import {useAuth} from '../../contexts/AuthContext';
 
 const Home = () => {
+  const {authToken} = useAuth();
+
   return (
     <BackgorundView>
-      <MainHeader />
+      <MainHeader authToken={authToken}/>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Header for analysis cards */}
         <AnalyseComponent />
