@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   Text,
@@ -26,6 +27,7 @@ const Otp = () => {
 
   const [otpValues, setOtpValues] = useState(['', '', '', '', '']);
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRef = [
     useRef(null),
@@ -53,6 +55,7 @@ const Otp = () => {
 
   const checkOtp = async () => {
     try {
+      setIsLoading(true);
       const fullfilledOtp = otpValues.join('');
       const data = await authService.validateOtp({
         mobile: mobile,
@@ -70,6 +73,8 @@ const Otp = () => {
       console.log(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,8 +127,12 @@ const Otp = () => {
             );
           })}
         </View>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginTxt}>Login</Text>
+        <TouchableOpacity disabled={isLoading} style={styles.loginBtn}>
+          {isLoading ? (
+            <ActivityIndicator size={'large'} color={colors.secondary} />
+          ) : (
+            <Text style={styles.loginTxt}>Login</Text>
+          )}
         </TouchableOpacity>
       </View>
     </BackgorundView>
