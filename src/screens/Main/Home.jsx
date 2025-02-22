@@ -1,14 +1,26 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {AnalyseComponent, BackgorundView, MainHeader} from '../../components';
+import {
+  AnalyseComponent,
+  AnalyseGraph,
+  BackgorundView,
+  MainHeader,
+  StudentList,
+} from '../../components';
+import {LineChart} from 'react-native-chart-kit';
 
 const Home = () => {
   return (
     <BackgorundView>
       <MainHeader />
-      <View style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* Header for analysis cards */}
         <AnalyseComponent />
-      </View>
+        {/* Monthly Analysis Report */}
+        <AnalyseGraph />
+        {/* StudentsList */}
+        <StudentList />
+      </ScrollView>
     </BackgorundView>
   );
 };
@@ -18,7 +30,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+    marginVertical: 10,
   },
 });

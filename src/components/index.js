@@ -7,5 +7,14 @@ import SecondaryHeader from './Headers/SecondaryHeader';
 
 // HomeStack
 import AnalyseComponent from './AnalyseComponent';
+import AnalyseGraph from './AnalyseGraph';
+import StudentList from './StudentList';
 
-export {BackgorundView, MainHeader, SecondaryHeader, AnalyseComponent};
+export {
+  BackgorundView,
+  MainHeader,
+  SecondaryHeader,
+  AnalyseComponent,
+  AnalyseGraph,
+  StudentList
+};
