@@ -5,4 +5,7 @@ import BackgorundView from './Common/BackgorundView';
 import MainHeader from './Headers/MainHeader';
 import SecondaryHeader from './Headers/SecondaryHeader';
 
-export {BackgorundView, MainHeader, SecondaryHeader};
+// HomeStack
+import AnalyseComponent from './AnalyseComponent';
+
+export {BackgorundView, MainHeader, SecondaryHeader, AnalyseComponent};
