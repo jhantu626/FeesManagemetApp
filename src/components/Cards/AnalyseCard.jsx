@@ -49,6 +49,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 1,
     borderColor: '#B3B3B3',
+    shadowColor: colors.secondary,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.8,
+    elevation: 8,
   },
   topContainer: {
     width: '100%',
