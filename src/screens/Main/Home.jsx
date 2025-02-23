@@ -15,14 +15,14 @@ const Home = () => {
 
   return (
     <BackgorundView>
-      <MainHeader authToken={authToken}/>
+      <MainHeader authToken={authToken} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Header for analysis cards */}
         <AnalyseComponent />
         {/* Monthly Analysis Report */}
         <AnalyseGraph />
         {/* StudentsList */}
-        <StudentList />
+        <StudentList authToken={authToken} />
       </ScrollView>
     </BackgorundView>
   );

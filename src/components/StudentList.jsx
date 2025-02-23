@@ -1,11 +1,29 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {colors} from '../utils/colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import fonts from '../utils/fonts';
 import StudentListCard from './Cards/StudentListCard';
+import {studentService} from '../services/StudentService';
+import {DrawerLayout} from 'react-native-gesture-handler';
 
-const StudentList = () => {
+const StudentList = ({authToken}) => {
+  const [students, setStudents] = useState([]);
+  const fetchStudentData = async () => {
+    try {
+      const data = await studentService.getStudents({
+        authToken: authToken,
+        isRecent: true,
+      });
+      console.log(data);
+      setStudents(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchStudentData();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -20,12 +38,16 @@ const StudentList = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.listContainer}>
-        <StudentListCard />
-        <StudentListCard />
-        <StudentListCard />
-        <StudentListCard />
-        <StudentListCard />
-        <StudentListCard />
+        {students.map((item, index) => {
+          return (
+            <StudentListCard
+              name={item?.name}
+              mobile={item?.phone}
+              profileImage={item?.profilePic}
+              key={index}
+            />
+          );
+        })}
       </View>
       <View style={styles.viewBtnContainer}>
         <TouchableOpacity style={styles.viewBtn}>
@@ -91,8 +113,8 @@ const styles = StyleSheet.create({
   viewText: {
     color: colors.primary,
     fontSize: 14,
-    fontFamily: fonts.semibold
-  }
+    fontFamily: fonts.semibold,
+  },
 });
 
 export default StudentList;

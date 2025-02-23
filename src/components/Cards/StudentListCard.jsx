@@ -1,22 +1,42 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils/colors';
 import fonts from '../../utils/fonts';
 
-const StudentListCard = () => {
+const StudentListCard = ({name, profileImage, mobile}) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <Image
           style={styles.profileImage}
-          source={require('./../../../assets/images/profile/avatar.jpg')}
+          source={
+            profileImage
+              ? {
+                  uri: `${process.env.API_URL}/api/v1/file/profile/${profileImage}`,
+                }
+              : require('./../../../assets/images/profile/avatar.jpg')
+          }
         />
         <View style={styles.textContainer}>
-          <Text style={styles.nameTxt}>Jhantu Bala</Text>
-          <Text style={styles.phoneTxt}>+91 9775746484</Text>
+          <Text style={styles.nameTxt}>{name ? name : 'Student'}</Text>
+          <Text style={styles.phoneTxt}>
+            +91 {mobile ? mobile : '97XXXXXX84'}
+          </Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.callBtn}>
+      <TouchableOpacity
+        style={styles.callBtn}
+        onPress={() => {
+          const url = `tel:${mobile}`;
+          Linking.openURL(url);
+        }}>
         <Image
           style={styles.callIcon}
           source={require('./../../../assets/images/dashboard/call-icon.webp')}
@@ -41,10 +61,10 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     flexDirection: 'row',
-    width: '55%',
+    width: '80%',
     height: '100%',
     // backgroundColor: 'red',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
   },
   profileImage: {
@@ -65,11 +85,14 @@ const styles = StyleSheet.create({
   nameTxt: {
     fontSize: 16,
     fontFamily: fonts.semibold,
-    marginBottom: -3
+    marginBottom: -3,
   },
   phoneTxt: {
     fontSize: 13,
     fontFamily: fonts.medium,
-    color: colors.textOnGray
+    color: colors.textOnGray,
+  },
+  textContainer: {
+    paddingLeft: 10,
   },
 });
