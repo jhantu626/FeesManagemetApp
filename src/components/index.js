@@ -10,7 +10,11 @@ import AnalyseComponent from './AnalyseComponent';
 import AnalyseGraph from './AnalyseGraph';
 import StudentList from './StudentList';
 
+// Loaders
+import Loader from './Loaders/Loader';
+
 export {
+  Loader,
   BackgorundView,
   MainHeader,
   SecondaryHeader,

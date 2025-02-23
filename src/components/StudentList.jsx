@@ -6,10 +6,14 @@ import fonts from '../utils/fonts';
 import StudentListCard from './Cards/StudentListCard';
 import {studentService} from '../services/StudentService';
 import {DrawerLayout} from 'react-native-gesture-handler';
+import Loader from './Loaders/Loader';
+import {ShimmerStudentList} from '../Shimmers';
 
 const StudentList = ({authToken}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const fetchStudentData = async () => {
+    setIsLoading(true);
     try {
       const data = await studentService.getStudents({
         authToken: authToken,
@@ -19,12 +23,16 @@ const StudentList = ({authToken}) => {
       setStudents(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     fetchStudentData();
   }, []);
-  return (
+  return isLoading ? (
+    <ShimmerStudentList />
+  ) : (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.titleText}>Students List</Text>
