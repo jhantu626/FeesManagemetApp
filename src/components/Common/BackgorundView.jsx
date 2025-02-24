@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryBackground,
   },
   toastContainer: {
-    position: 'absolute', // Position the toast absolutely
-    top: 0, // Align to the top
-    left: 0, // Align to the left
-    right: 0, // Align to the right
-    zIndex: 9999, // Set a very high zIndex
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 9999,
   },
 });
 
