@@ -5,9 +5,13 @@ import {ShimmerAnalyseCard} from '../Shimmers';
 import {analyseService} from '../services/AnalyseService';
 
 const AnalyseComponent = ({authToken}) => {
-  // For student analysis
+  // For Fees analysis
   const [isFeesLoading, setIsFeesLoading] = useState(true);
   const [feesData, setFeesData] = useState({});
+
+  // For Students analysis
+  const [isStudentLoading, setIsStudentLoading] = useState(true);
+  const [studentData, setStudentData] = useState({});
 
   const fetchFeesData = async () => {
     try {
@@ -22,8 +26,22 @@ const AnalyseComponent = ({authToken}) => {
     }
   };
 
+  const fetchStudentData = async () => {
+    try {
+      setIsStudentLoading(true);
+      const data = await analyseService.studentAnalysis({authToken: authToken});
+      setStudentData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsStudentLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchFeesData();
+    fetchStudentData();
   }, []);
 
   return (
@@ -38,13 +56,17 @@ const AnalyseComponent = ({authToken}) => {
           description={'This Months Fees'}
         />
       )}
+      {isStudentLoading ? (
+        <ShimmerAnalyseCard />
+      ) : (
+        <AnalyseCard
+          text={studentData?.current}
+          icon={require('./../../assets/images/dashboard/student-icon.webp')}
+          percentage={studentData?.percentage}
+          description={'Total Students'}
+        />
+      )}
 
-      <AnalyseCard
-        text={'417'}
-        icon={require('./../../assets/images/dashboard/student-icon.webp')}
-        percentage={100}
-        description={'Total Students'}
-      />
       <AnalyseCard
         text={'5'}
         icon={require('./../../assets/images/dashboard/subject-icon.webp')}
