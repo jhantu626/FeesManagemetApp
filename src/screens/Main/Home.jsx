@@ -18,7 +18,7 @@ const Home = () => {
       <MainHeader authToken={authToken} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Header for analysis cards */}
-        <AnalyseComponent />
+        <AnalyseComponent authToken={authToken} />
         {/* Monthly Analysis Report */}
         <AnalyseGraph />
         {/* StudentsList */}
