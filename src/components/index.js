@@ -9,11 +9,13 @@ import SecondaryHeader from './Headers/SecondaryHeader';
 import AnalyseComponent from './AnalyseComponent';
 import AnalyseGraph from './AnalyseGraph';
 import StudentList from './StudentList';
+import FeesList from './FeesList';
 
 // Loaders
 import Loader from './Loaders/Loader';
 
 export {
+  FeesList,
   Loader,
   BackgorundView,
   MainHeader,

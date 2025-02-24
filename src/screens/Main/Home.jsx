@@ -4,6 +4,7 @@ import {
   AnalyseComponent,
   AnalyseGraph,
   BackgorundView,
+  FeesList,
   MainHeader,
   StudentList,
 } from '../../components';
@@ -23,6 +24,8 @@ const Home = () => {
         <AnalyseGraph />
         {/* StudentsList */}
         <StudentList authToken={authToken} />
+        {/* Fees List */}
+        <FeesList />
       </ScrollView>
     </BackgorundView>
   );
