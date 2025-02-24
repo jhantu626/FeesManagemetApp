@@ -39,9 +39,25 @@ const AnalyseComponent = ({authToken}) => {
     }
   };
 
+  const [isSubjectsLoading, setIsSubjectsLoading] = useState(true);
+const [subjectsData, setSubjectsData] = useState({});
+const fetchSubjectsData = async () => {
+  try {
+    setIsSubjectsLoading(true);
+    const data = await analyseService.subjectAnalysis({ authToken });
+    setSubjectsData(data);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setIsSubjectsLoading(false);
+  }
+};
+
   useEffect(() => {
     fetchFeesData();
     fetchStudentData();
+    fetchSubjectsData();
   }, []);
 
   return (
@@ -66,13 +82,19 @@ const AnalyseComponent = ({authToken}) => {
           description={'Total Students'}
         />
       )}
+      
+      
+      {isSubjectsLoading ? (
+        <ShimmerAnalyseCard />
+      ) : (
+        <AnalyseCard
+          text={subjectsData?.current}
+          icon={require('./../../assets/images/dashboard/subject-icon.webp')}
+          percentage={subjectsData?.percentage}
+          description={'Total Subjects'}
+        />
+      )}
 
-      <AnalyseCard
-        text={'5'}
-        icon={require('./../../assets/images/dashboard/subject-icon.webp')}
-        percentage={150}
-        description={'Total Subjects'}
-      />
       <AnalyseCard
         text={'10'}
         icon={require('./../../assets/images/dashboard/teacher-icon.webp')}

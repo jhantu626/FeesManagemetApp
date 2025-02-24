@@ -37,6 +37,22 @@ class AnalyseService {
       return data;
     }
   }
+  
+  async subjectAnalysis({authToken}) {
+    const uri = `${this.baseUrl}/api/v1/teacher/subject-analysis`;
+    try {
+      const response = await axios.get(uri, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      const data = await response.data;
+      return data;
+    } catch (error) {
+      const data = await error.response.data;
+      return data;
+    }
+  }
 
   
 
