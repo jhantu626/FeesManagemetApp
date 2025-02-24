@@ -40,24 +40,40 @@ const AnalyseComponent = ({authToken}) => {
   };
 
   const [isSubjectsLoading, setIsSubjectsLoading] = useState(true);
-const [subjectsData, setSubjectsData] = useState({});
-const fetchSubjectsData = async () => {
-  try {
-    setIsSubjectsLoading(true);
-    const data = await analyseService.subjectAnalysis({ authToken });
-    setSubjectsData(data);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    setIsSubjectsLoading(false);
-  }
-};
+  const [subjectsData, setSubjectsData] = useState({});
+  const fetchSubjectsData = async () => {
+    try {
+      setIsSubjectsLoading(true);
+      const data = await analyseService.subjectAnalysis({authToken});
+      setSubjectsData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubjectsLoading(false);
+    }
+  };
+
+  const [isBatchesLoading, setIsBatchesLoading] = useState(true);
+  const [batchesData, setBatchesData] = useState({});
+  const fetchBatchesData = async () => {
+    try {
+      setIsBatchesLoading(true);
+      const data = await analyseService.batchAnalysis({authToken});
+      setBatchesData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsBatchesLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchFeesData();
     fetchStudentData();
     fetchSubjectsData();
+    fetchBatchesData();
   }, []);
 
   return (
@@ -82,8 +98,7 @@ const fetchSubjectsData = async () => {
           description={'Total Students'}
         />
       )}
-      
-      
+
       {isSubjectsLoading ? (
         <ShimmerAnalyseCard />
       ) : (
@@ -95,12 +110,16 @@ const fetchSubjectsData = async () => {
         />
       )}
 
-      <AnalyseCard
-        text={'10'}
-        icon={require('./../../assets/images/dashboard/teacher-icon.webp')}
-        percentage={100}
-        description={'Total Batches'}
-      />
+      {isBatchesLoading ? (
+        <ShimmerAnalyseCard />
+      ) : (
+        <AnalyseCard
+          text={batchesData?.current}
+          icon={require('./../../assets/images/dashboard/teacher-icon.webp')}
+          percentage={batchesData?.percentage}
+          description={'Total Batches'}
+        />
+      )}
     </ScrollView>
   );
 };
