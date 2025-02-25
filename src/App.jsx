@@ -3,6 +3,7 @@ import {
   AuthHome,
   Batch,
   Fees,
+  FeesListScreen,
   Home,
   Login,
   Otp,
@@ -95,6 +96,20 @@ const App = () => {
     );
   };
 
+  const FeesStack = () => {
+    return (
+      <Stack.Navigator
+        initialRouteName="Fees"
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}>
+        <Stack.Screen name="Fees" component={Fees} />
+        <Stack.Screen name="FeesList" component={FeesListScreen} />
+      </Stack.Navigator>
+    );
+  };
+
   const AppStack = () => {
     return (
       <Tab.Navigator
@@ -158,7 +173,7 @@ const App = () => {
         />
         <Tab.Screen
           name="Fees"
-          component={Fees}
+          component={FeesStack}
           options={{
             tabBarIcon: ({size, focus, color}) => {
               return <FontAwesome5 name="wallet" size={24} color={color} />;

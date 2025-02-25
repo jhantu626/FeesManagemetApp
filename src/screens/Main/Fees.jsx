@@ -7,16 +7,23 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {BackgorundView, FeesList, SecondaryHeader, StudentList} from '../../components';
+import {
+  BackgorundView,
+  FeesList,
+  SecondaryHeader,
+  StudentList,
+} from '../../components';
 import {useAuth} from '../../contexts/AuthContext';
 import {colors} from '../../utils/colors';
 import fonts from '../../utils/fonts';
+import {useNavigation} from '@react-navigation/native';
 
 const Fees = () => {
   const {authToken} = useAuth();
+  const navigation = useNavigation();
   return (
     <BackgorundView>
-      <SecondaryHeader title="Fees" />
+      <SecondaryHeader title="Fees" isParent={true} />
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.mainContainer}>
           <TouchableOpacity style={styles.btnContainer}>
@@ -26,7 +33,11 @@ const Fees = () => {
               source={require('./../../../assets/images/dashboard/fees-receive.webp')}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnContainer}>
+          <TouchableOpacity
+            style={styles.btnContainer}
+            onPress={() => {
+              navigation.navigate('FeesList');
+            }}>
             <Text style={styles.text}>Fees List</Text>
             <Image
               style={styles.image}

@@ -16,7 +16,7 @@ const Student = () => {
   const {authToken} = useAuth();
   return (
     <BackgorundView>
-      <SecondaryHeader title="Student" />
+      <SecondaryHeader title="Student" isParent={true}/>
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.mainContainer}>
           <TouchableOpacity style={styles.btnContainer}>

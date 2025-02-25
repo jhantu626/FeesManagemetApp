@@ -11,9 +11,12 @@ import Register from './AuthScreens/Register';
 // 1. -- Home --
 import Home from './Main/Home';
 
+
 import Student from './Main/Student';
 
+// Fees Related
 import Fees from './Main/Fees';
+import FeesListScreen from './Main/Fees/FeesListScreen';
 
 import Batch from './Main/Batch';
 
@@ -29,5 +32,6 @@ export {
   Home,
   Student,
   Fees,
+  FeesListScreen,
   Batch
 };

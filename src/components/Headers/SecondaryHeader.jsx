@@ -3,12 +3,22 @@ import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {colors} from '../../utils/colors';
 import fonts from '../../utils/fonts';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
-const SecondaryHeader = ({title, isBtn = false, btnText}) => {
+const SecondaryHeader = ({title, isBtn = false, btnText, isParent = false}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <TouchableOpacity style={styles.backableBtn}>
+        <TouchableOpacity
+          style={styles.backableBtn}
+          onPress={() => {
+            if (isParent) {
+              navigation.goBack();
+            } else {
+              navigation.dispatch(StackActions.pop(1));
+            }
+          }}>
           <AntDesign name="arrowleft" size={30} />
         </TouchableOpacity>
         <Text style={styles.titleText}>{title}</Text>
