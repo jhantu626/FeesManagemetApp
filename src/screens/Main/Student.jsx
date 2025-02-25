@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 10,
     justifyContent: 'space-between',
+    
   },
   btnContainer: {
     width: '48%',

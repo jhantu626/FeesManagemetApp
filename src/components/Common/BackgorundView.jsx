@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils/colors';
 import Toast from 'react-native-toast-message';
@@ -7,6 +7,7 @@ import {toastConfig} from '../../utils/ToastsConfig';
 const BackgroundView = ({children}) => {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar backgroundColor={colors.primary} />
       <View style={styles.container}>
         {children}
         <View style={styles.toastContainer}>
