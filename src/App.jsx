@@ -98,7 +98,7 @@ const App = () => {
   const AppStack = () => {
     return (
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Fees"
         screenOptions={{
           animation: 'shift',
           tabBarActiveTintColor: colors.primary,
