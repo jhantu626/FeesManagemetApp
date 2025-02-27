@@ -1,12 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {colors} from '../utils/colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import fonts from '../utils/fonts';
 import StudentListCard from './Cards/StudentListCard';
 import {studentService} from '../services/StudentService';
-import {DrawerLayout} from 'react-native-gesture-handler';
-import Loader from './Loaders/Loader';
 import {ShimmerStudentList} from '../Shimmers';
 
 const StudentList = ({authToken}) => {
@@ -36,32 +34,46 @@ const StudentList = ({authToken}) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.titleText}>Students List</Text>
-        <TouchableOpacity style={styles.sortBtn}>
-          <FontAwesome5
-            name="sort-amount-down"
-            size={24}
-            color={colors.primary}
-          />
-          <Text style={styles.sortTxt}>Sort</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.listContainer}>
-        {students.map((item, index) => {
-          return (
-            <StudentListCard
-              name={item?.name}
-              mobile={item?.phone}
-              profileImage={item?.profilePic}
-              key={index}
+        {students.length && (
+          <TouchableOpacity style={styles.sortBtn}>
+            <FontAwesome5
+              name="sort-amount-down"
+              size={24}
+              color={colors.primary}
             />
-          );
-        })}
+            <Text style={styles.sortTxt}>Sort</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      <View style={styles.viewBtnContainer}>
-        <TouchableOpacity style={styles.viewBtn}>
-          <Text style={styles.viewText}>View More</Text>
-        </TouchableOpacity>
-      </View>
+      {students.length > 0 ? (
+        <>
+          <View style={styles.listContainer}>
+            {students.map((item, index) => {
+              return (
+                <StudentListCard
+                  name={item?.name}
+                  mobile={item?.phone}
+                  profileImage={item?.profilePic}
+                  key={index}
+                />
+              );
+            })}
+          </View>
+          <View style={styles.viewBtnContainer}>
+            <TouchableOpacity style={styles.viewBtn}>
+              <Text style={styles.viewText}>View More</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      ) : (
+        <View style={styles.notFoundContainer}>
+          <Image
+            style={styles.notFoundImage}
+            resizeMode="contain"
+            source={require('./../../assets/images/empty.webp')}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -122,6 +134,16 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 14,
     fontFamily: fonts.semibold,
+  },
+  notFoundContainer: {
+    width: '100%',
+    height: '280',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notFoundImage: {
+    width: 180,
+    height: 180,
   },
 });
 
