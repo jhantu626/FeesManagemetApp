@@ -13,7 +13,7 @@ const FeesListCard = ({name, batch, description, fees, revicedAt}) => {
         <Text style={styles.subText}>{description}</Text>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.priceText}>${fees}</Text>
+        <Text style={styles.priceText}>₹{fees}</Text>
         <Text style={styles.subRecivedFont}>
           Reviced in {convertDate(revicedAt)}
         </Text>
