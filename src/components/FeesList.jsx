@@ -1,5 +1,5 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 
 // Icons
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -7,30 +7,77 @@ import {colors} from '../utils/colors';
 import fonts from '../utils/fonts';
 import FeesListCard from './Cards/FeesListCard';
 import {ShimmerFeesList} from '../Shimmers';
+import {feesService} from '../services/FeesService';
+import {useFocusEffect} from '@react-navigation/native';
 
-const FeesList = () => {
+const FeesList = ({authToken}) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [feesData, setFeesData] = useState([]);
+
+  const fetchFeesDetails = async () => {
+    try {
+      setIsLoading(true);
+      const data = await feesService.feesHistoryInRange({
+        authToken: authToken,
+        pageNo: 0,
+        pageSize: 6,
+      });
+      console.log('Fees Data', data);
+      setFeesData(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchFeesDetails();
+  }, []);
+
   return isLoading ? (
     <ShimmerFeesList />
   ) : (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.titleText}>Fees List</Text>
-        <TouchableOpacity style={styles.filterContainer}>
-          <FontAwesome name="filter" size={28} color={colors.primary} />
-          <Text style={styles.filterText}>Filter</Text>
-        </TouchableOpacity>
+        {feesData.length > 0 && (
+          <TouchableOpacity style={styles.filterContainer}>
+            <FontAwesome name="filter" size={28} color={colors.primary} />
+            <Text style={styles.filterText}>Filter</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      <View style={styles.listContainer}>
-        <FeesListCard />
-        <FeesListCard />
-        <FeesListCard />
-      </View>
-      <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.viewBtn}>
-          <Text style={styles.viewTxt}>View More</Text>
-        </TouchableOpacity>
-      </View>
+      {feesData.length > 0 ? (
+        <>
+          <View style={styles.listContainer}>
+            {feesData.map((item, index) => {
+              return (
+                <FeesListCard
+                  name={item?.studentName}
+                  batch={`Batch - ${item?.batchName}`}
+                  description={item?.description}
+                  fees={item?.amountPaid}
+                  revicedAt={item?.paymentDate}
+                />
+              );
+            })}
+          </View>
+          <View style={styles.bottomContainer}>
+            <TouchableOpacity style={styles.viewBtn}>
+              <Text style={styles.viewTxt}>View More</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      ) : (
+        <View style={styles.notFoundContainer}>
+          <Image
+            style={styles.notFoundImage}
+            resizeMode="contain"
+            source={require('./../../assets/images/fees-not-found.webp')}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -92,6 +139,16 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   listContainer: {},
+  notFoundContainer: {
+    width: '100%',
+    height: '280',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notFoundImage: {
+    width: 250,
+    height: 250,
+  },
 });
 
 export default FeesList;

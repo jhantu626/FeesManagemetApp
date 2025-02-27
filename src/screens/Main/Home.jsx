@@ -25,7 +25,7 @@ const Home = () => {
         {/* StudentsList */}
         <StudentList authToken={authToken} />
         {/* Fees List */}
-        <FeesList />
+        <FeesList authToken={authToken}/>
       </ScrollView>
     </BackgorundView>
   );

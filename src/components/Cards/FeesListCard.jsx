@@ -2,18 +2,21 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils/colors';
 import fonts from '../../utils/fonts';
+import {convertDate} from '../../utils/common';
 
-const FeesListCard = () => {
+const FeesListCard = ({name, batch, description, fees, revicedAt}) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text style={styles.nameTxt}>Jhantu Bala</Text>
-        <Text style={styles.subText}>Batch - Java(2024)</Text>
-        <Text style={styles.subText}>February 2025 Fees</Text>
+        <Text style={styles.nameTxt}>{name}</Text>
+        <Text style={styles.subText}>{batch}</Text>
+        <Text style={styles.subText}>{description}</Text>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.priceText}>$1000</Text>
-        <Text style={styles.subRecivedFont}>Recived in Feb 24, 2025</Text>
+        <Text style={styles.priceText}>${fees}</Text>
+        <Text style={styles.subRecivedFont}>
+          Reviced in {convertDate(revicedAt)}
+        </Text>
       </View>
     </View>
   );
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
   priceText: {
     fontSize: 16,
     fontFamily: fonts.bold,
-    color: colors.dangerAlert
+    color: colors.dangerAlert,
   },
   subRecivedFont: {
     fontSize: 12,
