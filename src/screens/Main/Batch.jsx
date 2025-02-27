@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     marginBottom: 25,
     padding: 15,
+    borderWidth: 1,
+    borderColor: colors.gray30
   },
   headerContainer: {
     width: '100%',
