@@ -113,7 +113,7 @@ const App = () => {
   const AppStack = () => {
     return (
       <Tab.Navigator
-        initialRouteName="Batch"
+        initialRouteName="Home"
         screenOptions={{
           animation: 'shift',
           tabBarActiveTintColor: colors.primary,
