@@ -14,7 +14,6 @@ const MainHeader = ({authToken}) => {
         authToken: authToken,
       });
       setProfileData(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }

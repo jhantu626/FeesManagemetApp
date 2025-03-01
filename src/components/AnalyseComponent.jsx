@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useCallback} from 'react';
 import AnalyseCard from './Cards/AnalyseCard';
 import {ShimmerAnalyseCard} from '../Shimmers';
 import {analyseService} from '../services/AnalyseService';
@@ -26,7 +26,7 @@ const AnalyseComponent = ({authToken}) => {
     }
   };
 
-  const fetchStudentData = async () => {
+  const fetchStudentData = useCallback(async () => {
     try {
       setIsStudentLoading(true);
       const data = await analyseService.studentAnalysis({authToken: authToken});
@@ -37,11 +37,11 @@ const AnalyseComponent = ({authToken}) => {
     } finally {
       setIsStudentLoading(false);
     }
-  };
+  }, []);
 
   const [isSubjectsLoading, setIsSubjectsLoading] = useState(true);
   const [subjectsData, setSubjectsData] = useState({});
-  const fetchSubjectsData = async () => {
+  const fetchSubjectsData = useCallback(async () => {
     try {
       setIsSubjectsLoading(true);
       const data = await analyseService.subjectAnalysis({authToken});
@@ -52,11 +52,11 @@ const AnalyseComponent = ({authToken}) => {
     } finally {
       setIsSubjectsLoading(false);
     }
-  };
+  }, []);
 
   const [isBatchesLoading, setIsBatchesLoading] = useState(true);
   const [batchesData, setBatchesData] = useState({});
-  const fetchBatchesData = async () => {
+  const fetchBatchesData = useCallback(async () => {
     try {
       setIsBatchesLoading(true);
       const data = await analyseService.batchAnalysis({authToken});
@@ -67,9 +67,10 @@ const AnalyseComponent = ({authToken}) => {
     } finally {
       setIsBatchesLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    console.log('fatching');
     fetchFeesData();
     fetchStudentData();
     fetchSubjectsData();

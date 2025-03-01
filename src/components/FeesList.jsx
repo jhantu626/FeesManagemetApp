@@ -22,7 +22,6 @@ const FeesList = ({authToken}) => {
         pageNo: 0,
         pageSize: 6,
       });
-      console.log('Fees Data', data);
       setFeesData(data);
     } catch (error) {
       console.error(error);

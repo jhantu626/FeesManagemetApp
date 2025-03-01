@@ -31,7 +31,7 @@ const AnalyseCard = ({text, icon, percentage = -10, description}) => {
               styles.percentageText,
               {color: percentage >= 0 ? 'green' : 'red'},
             ]}>
-            {percentage}%
+            {percentage.toFixed(1)}%
           </Text>
         </View>
       </View>
