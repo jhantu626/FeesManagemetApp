@@ -83,7 +83,7 @@ const AnalyseComponent = ({authToken}) => {
         <ShimmerAnalyseCard />
       ) : (
         <AnalyseCard
-          text={`$${feesData?.current}`}
+          text={`₹${feesData?.current}`}
           icon={require('./../../assets/images/dashboard/fees-icon.webp')}
           percentage={feesData?.percentage}
           description={'This Months Fees'}
