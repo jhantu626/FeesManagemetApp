@@ -10,6 +10,7 @@ import {
   Register,
   SplashScreen,
   Student,
+  StudentRegister,
 } from './screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -110,10 +111,21 @@ const App = () => {
     );
   };
 
+  const StudentStack = () => {
+    return (
+      <Stack.Navigator
+        initialRouteName="StudentRegister"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Student" component={Student} />
+        <Stack.Screen name="StudentRegister" component={StudentRegister} />
+      </Stack.Navigator>
+    );
+  };
+
   const AppStack = () => {
     return (
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Student"
         screenOptions={{
           animation: 'shift',
           tabBarActiveTintColor: colors.primary,
@@ -162,7 +174,7 @@ const App = () => {
         />
         <Tab.Screen
           name="Student"
-          component={Student}
+          component={StudentStack}
           options={{
             tabBarIcon: ({size, focus, color}) => {
               return (
